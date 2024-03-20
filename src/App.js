@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+
+import Screen from "./componets/screen";
+import Keyboard from "./componets/keyboard";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [result, setResult] = useState("");
+
+	const inputHandle = (event) => {
+		if (result.length <= 13) {
+			setResult(result.concat(event.target.value));
+		}
+	};
+	const clearScreen = () => {
+		setResult("");
+	};
+	const calculate = () => {
+		setResult(eval(result).toString());
+	};
+	const handleBackspace = () => {
+		setResult(result.substring(0, result.length - 1));
+	};
+
+	return (
+		<div className="w-screen h-svh grid-rows-2">
+			<Screen result={result} />
+			<Keyboard
+				onClick={inputHandle}
+				clear={clearScreen}
+				calc={calculate}
+				backspace={handleBackspace}
+			/>
+		</div>
+	);
 }
 
 export default App;
