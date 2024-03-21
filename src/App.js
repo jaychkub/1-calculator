@@ -4,30 +4,50 @@ import Screen from "./componets/screen";
 import Keyboard from "./componets/keyboard";
 
 function App() {
-	const [result, setResult] = useState("");
+	const [a, setA] = useState("");
+	const [b, setB] = useState("");
+	const [operator, setOperator] = useState("");
 
-	const inputHandle = (event) => {
-		if (result.length <= 13) {
-			setResult(result.concat(event.target.value));
+	const handleNumber = (event) => {
+		if (operator === "") setA(a.concat(event.target.value));
+		else setB(b.concat(event.target.value));
+	};
+
+	const handleOperator = (event) => {
+		if (b === "") setOperator(event.target.value);
+		else {
+			handleEqual();
+			setOperator(event.target.value);
 		}
 	};
-	const clearScreen = () => {
-		setResult("");
+
+	const handleEqual = () => {
+		if (a && b) {
+			setA(eval(a + operator + b).toString());
+			setB("");
+			setOperator("");
+		}
 	};
-	const calculate = () => {
-		setResult(eval(result).toString());
+
+	const handleClear = () => {
+		setA("");
+		setB("");
+		setOperator("");
 	};
+
 	const handleBackspace = () => {
-		setResult(result.substring(0, result.length - 1));
+		if (operator === "") setA(a.substring(0, a.length - 1));
+		else setB(b.substring(0, b.length - 1));
 	};
 
 	return (
 		<div className="w-screen h-svh grid-rows-2">
-			<Screen result={result} />
+			<Screen result={b === "" ? a : b} />
 			<Keyboard
-				onClick={inputHandle}
-				clear={clearScreen}
-				calc={calculate}
+				onClick={handleNumber}
+				operator={handleOperator}
+				clear={handleClear}
+				calc={handleEqual}
 				backspace={handleBackspace}
 			/>
 		</div>

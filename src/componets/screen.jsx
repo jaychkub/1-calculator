@@ -2,9 +2,10 @@ import React from 'react';
 
 const Screen = (props) => {
     const result = props.result
+    console.log(result)
 
     return (
-        <input disabled={true} type='text' placeholder={result} className='bg-black w-screen placeholder:text-white text-right text-wrap text-6xl' />
+        <input type='text' placeholder={result} className='bg-black h-2/5 w-screen pt-[14rem] pr-9 placeholder:text-white text-right text-wrap text-8xl' />
     );
 }
 
