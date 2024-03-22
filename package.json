@@ -1,7 +1,7 @@
 {
   "name": "1-calculator",
   "version": "0.1.0",
-  "homepage": "http://Jaychkub.github.io/1-calculator",
+  "homepage": "https://jaychkub.github.io/1-calculator/",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
