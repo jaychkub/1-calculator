@@ -10,20 +10,12 @@ function App() {
 
 	const handleNumber = (event) => {
 		if (operator === "") {
-			if (
-				event.target.value === "." &&
-				a.substring(a.length - 1, a.length) === "."
-			)
-				return;
-			if (a.length < 4)
+			if (event.target.value === "." && a.includes(".")) return;
+			if (a.length < 7)
 				setA(a.replace(/^0+/, "").concat(event.target.value));
 		} else {
-			if (
-				event.target.value === "." &&
-				b.substring(b.length - 1, b.length) === "."
-			)
-				return;
-			if (b.length < 4)
+			if (event.target.value === "." && b.includes(".")) return;
+			if (b.length < 7)
 				setB(b.replace(/^0+/, "").concat(event.target.value));
 		}
 	};
@@ -37,6 +29,9 @@ function App() {
 	};
 
 	const handleEqual = () => {
+		if (operator === "")
+			if (a[0] === "." && a.length === 1) return;
+			else if (b[0] === "." && b.length === 1) return;
 		if (a && b) {
 			setA(eval(a + operator + b).toString());
 			setB("");
@@ -51,13 +46,25 @@ function App() {
 	};
 
 	const handleInvert = () => {
-		if (operator === "") setA(-Number(a).toString());
-		else setB(-Number(b).toString());
+		if (a[0] === "0" || b[0] === "0") return;
+		if (operator === "") {
+			if (a.length < 1) return;
+			setA(-Number(a).toString());
+		} else {
+			if (b.length < 1) return;
+			setB(-Number(b).toString());
+		}
 	};
 
 	const handlePercent = () => {
-		if (operator === "") setA(a / 100);
-		else setB(b / 100);
+		if (a[0] === "0" || b[0] === "0") return;
+		if (operator === "") {
+			if (a.length < 1) return;
+			setA(a / 100);
+		} else {
+			if (b.length < 1) return;
+			setB(b / 100);
+		}
 	};
 
 	const handleBackspace = () => {
@@ -66,14 +73,13 @@ function App() {
 	};
 
 	return (
-		<div className="w-screen h-svh grid-rows-2">
-			<Screen result={b === "" ? a : b} />
+		<div className="w-screen h-svh grid-rows-2 bg-black">
+			<Screen equation={a + operator + b} result={b === "" ? a : b} />
 			<Keyboard
 				onClick={handleNumber}
 				operator={handleOperator}
 				clear={handleClear}
 				calc={handleEqual}
-				backspace={handleBackspace}
 				perc={handlePercent}
 				invert={handleInvert}
 			/>
