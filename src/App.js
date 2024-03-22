@@ -73,16 +73,18 @@ function App() {
 	};
 
 	return (
-		<div className="w-screen h-svh grid-rows-2 bg-black">
-			<Screen equation={a + operator + b} result={b === "" ? a : b} />
-			<Keyboard
-				onClick={handleNumber}
-				operator={handleOperator}
-				clear={handleClear}
-				calc={handleEqual}
-				perc={handlePercent}
-				invert={handleInvert}
-			/>
+		<div className="bg-[url(./images/zigzag.jpg)] flex justify-center">
+			<div className="w-screen max-w-[425px] h-svh grid-rows-2 bg-black shadow-2xl shadow-white">
+				<Screen equation={a + operator + b} result={b === "" ? a : b} />
+				<Keyboard
+					onClick={handleNumber}
+					operator={handleOperator}
+					clear={handleClear}
+					calc={handleEqual}
+					perc={handlePercent}
+					invert={handleInvert}
+				/>
+			</div>
 		</div>
 	);
 }

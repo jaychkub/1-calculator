@@ -39,7 +39,7 @@ const Keyboard = (props) => {
     const invert = props.invert
 
     return (
-        <div className='bg-black h-3/5 grid grid-cols-4 gap-4 p-6'>
+        <div className='bg-black w-full h-3/5 grid grid-cols-4 gap-4 p-6'>
             <Button value="AC" color="white" onClick={clear} />
             <Button value="+/-" color="white" onClick={invert} />
             <Button value="%" color="white" onClick={perc} />
