@@ -50,10 +50,10 @@ function App() {
 		if (a[0] === "0" || b[0] === "0") return;
 		if (operator === "") {
 			if (a.length < 1) return;
-			setA(-Number(a).toExponential(6));
+			setA(-Number(a).toString());
 		} else {
 			if (b.length < 1) return;
-			setB(-Number(b).toExponential(6));
+			setB(-Number(b).toString());
 		}
 	};
 
