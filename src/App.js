@@ -11,11 +11,11 @@ function App() {
 	const handleNumber = (event) => {
 		if (operator === "") {
 			if (event.target.value === "." && a.includes(".")) return;
-			if (a.length < 7)
+			if (a.length < 6)
 				setA(a.replace(/^0+/, "").concat(event.target.value));
 		} else {
 			if (event.target.value === "." && b.includes(".")) return;
-			if (b.length < 7)
+			if (b.length < 6)
 				setB(b.replace(/^0+/, "").concat(event.target.value));
 		}
 	};
@@ -34,6 +34,7 @@ function App() {
 			else if (b[0] === "." && b.length === 1) return;
 		if (a && b) {
 			setA(eval(a + operator + b).toString());
+			if (a.length > 5) setA(Number(a).toExponential(1));
 			setB("");
 			setOperator("");
 		}
@@ -49,10 +50,10 @@ function App() {
 		if (a[0] === "0" || b[0] === "0") return;
 		if (operator === "") {
 			if (a.length < 1) return;
-			setA(-Number(a).toString());
+			setA(-Number(a).toExponential(6));
 		} else {
 			if (b.length < 1) return;
-			setB(-Number(b).toString());
+			setB(-Number(b).toExponential(6));
 		}
 	};
 
@@ -73,8 +74,8 @@ function App() {
 	};
 
 	return (
-		<div className="bg-[url(./images/zigzag.jpg)] flex justify-center">
-			<div className="w-screen max-w-[425px] h-svh grid-rows-2 bg-black shadow-2xl shadow-white">
+		<div className="bg-[url(./images/zigzag.jpg)] flex justify-center h-svh">
+			<div className="w-screen max-w-[425px] h-full grid-rows-2 bg-black shadow-2xl shadow-white">
 				<Screen equation={a + operator + b} result={b === "" ? a : b} />
 				<Keyboard
 					onClick={handleNumber}
